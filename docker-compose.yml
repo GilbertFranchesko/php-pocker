@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./nginx/
+    container_name: nginx_server
+    ports:
+      - 80:80
+      - 443:443
+    
+    links:
+     - php
+    
+    volumes:
+     - ./www/html/:/var/www/html
+
+  php:
+    image: php:7.0-fpm
+    container_name: php_container
+    expose:
+      - 9000
+    volumes:
+      - ./www/html/:/var/www/html/
